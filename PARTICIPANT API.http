@@ -1,0 +1,26 @@
+### On récupère la liste des participants
+GET http://localhost:8080/participants
+
+### On crée un participant
+POST http://localhost:8080/participants
+Content-Type: application/json
+
+{ "prenom" : "Cyril", "nom": "Mace"}
+
+### On crée un participant 2
+POST http://localhost:8080/participants
+Content-Type: application/json
+
+{ "prenom" : "Tom", "nom": "Pouce"}
+
+### On affecte le participant d'id : 2 à la tache d'id : 1
+POST http://localhost:8080/todo/1/participants
+Content-Type: application/json
+
+{ "id" : 2}
+
+### On affecte un nouveau participant à la tache d'id : 1
+POST http://localhost:8080/todo/1/participants
+Content-Type: application/json
+
+{ "prenom" : "Nouveau", "nom": "Participant"}
