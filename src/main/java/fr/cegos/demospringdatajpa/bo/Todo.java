@@ -23,7 +23,7 @@ public class Todo {
     Long id;
     @NotEmpty // validation : le nom d'une tache doit être non vice
     @Size(min = 3, max = 20) // validation : le nom d'une tache doit contenir entre 3 et 10 caractères
-    @Column(name = "nom") // on peut définir des nom de colonnes particulier
+    @Column(name = "nom", unique = true) // on peut définir des nom de colonnes particulier
     String name;
     @Future(message = "une tâche doit être dans le futur") // validation : la date limite d'une tache doit être dans le futur
     LocalDate dueDate;

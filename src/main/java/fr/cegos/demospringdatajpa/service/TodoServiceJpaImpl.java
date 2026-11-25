@@ -8,6 +8,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,8 +26,22 @@ public class TodoServiceJpaImpl implements TodoService {
         return todoRepository.findAll();
     }
 
+    /**
+     * @Transactional
+     * Etant donné que ma méthode possède 2 instructions qui effectuent des traitements en base de donnée
+     * Il est important que ces 2 instrutions réussissent ou échouent, mais pas à moitié.
+     * Pour garantir cela, on annote la méthode avec @Transactional
+     * => si la première ou deuxième instruction échoue, toute la transaction effectue un "RollBack" et rien n'est créé (pas d'incohérence de données)
+     */
+    @Transactional
     @Override
     public Todo addTodo(Todo todo) {
+        // instruction 1 - je sauvegarde le responsable si pas existant en base de donnée
+        if (todo.getResponsable() != null){
+            participantRepository.save(todo.getResponsable());
+        }
+
+        // instruction 2 - je sauvegarde la tache
         // je délègue le traitement à la couche Repository
         return todoRepository.save(todo);
     }

@@ -31,17 +31,23 @@ public interface TodoRepository extends JpaRepository<Todo, Long> {
     // Méthode qui renvoie les tâches dont le nom contient le terme de recherche en paramètre (pas de différence de casse)
     List<Todo> findAllByNameContainsIgnoreCase(String termeRecherche);
 
-    // Méthode qui renvoie les tâches dont le nom
-    // Ou le prenom OU le nom
+    // Méthode qui renvoie les tâches
+    // dont le nom ou le prenom
     // du responsable contient le terme de recherche en paramètre (pas de différence de casse)
     @Query("select t from Todo t " +
             "where t.responsable.prenom like %:search% " +
             "OR t.responsable.nom  like %:search%")
-    List<Todo> recherche(String search);
+    List<Todo> rechercheResponsable(String search);
 
 
 
     // TODO
     // Méthode qui renvoie les tâches dont le nom
     // Ou le prenom OU le nom d'un des participants contient le terme de recherche en paramètre (pas de différence de casse)
+    @Query("select t from Todo t " +
+            "left join t.participants p " +
+            "where t.name like %:search% " +
+            "OR p.prenom like %:search% " +
+            "OR p.nom  like %:search%")
+    List<Todo> recherche(String search);
 }
