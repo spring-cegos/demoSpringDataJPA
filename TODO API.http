@@ -1,6 +1,9 @@
 ### On récupère la liste des tâches
 GET http://localhost:8080/todo
 
+### On recherche les tâches selon le terme de recherche "faire"
+GET http://localhost:8080/todo?termeRecherche=faire
+
 ### On crée une tâche trop longue et dans le passé (cas d'erreur)
 POST http://localhost:8080/todo
 Content-Type: application/json
@@ -11,7 +14,7 @@ Content-Type: application/json
 POST http://localhost:8080/todo
 Content-Type: application/json
 
-{ "name" : "nouvelle tâche", "dueDate": "2027-01-01"}
+{ "name" : "autre tâche", "dueDate": "2027-01-01", "responsable" :  { "prenom" : "Cyril", "nom": "Mace"}}
 
 
 ### On modifie la tâche d'id : 2
@@ -27,4 +30,4 @@ DELETE http://localhost:8080/todo/2
 GET http://localhost:8080/todo/3
 
 ### On recupère les tâches contenant : "faire"
-GET http://localhost:8080/todo?termeRecherche=faire
+GET http://localhost:8080/todo?termeRecherche=Cyril

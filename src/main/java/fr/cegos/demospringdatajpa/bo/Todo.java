@@ -42,7 +42,7 @@ public class Todo {
 
     // @ManyToOne : UNE tache possède UN responsable (de type participant), mais un participant peut être responsable de plusieurs taches
     // correspond à la cardinalité * -- A d'un diagramme de classe
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Participant responsable;
 
     // @ManyToMany : UNE tache possède plusieurs participants travaillants dessus, mais un participant peut participer à plusieurs taches

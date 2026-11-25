@@ -51,7 +51,8 @@ public class TodoServiceJpaImpl implements TodoService {
     @Override
     public List<Todo> searchTodos(String termeRecherche) {
         // je délègue le traitement à la couche Repository
-        return null; // todo : Query method pour la requête
+        // return todoRepository.findAllByNameContainsIgnoreCase(termeRecherche); // todo : Query method pour la requête
+        return todoRepository.recherche(termeRecherche); // todo : Query method pour la requête
     }
 
     @Override
